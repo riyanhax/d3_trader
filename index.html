@@ -1,0 +1,44 @@
+<!Doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./plot.css">
+    <link rel="stylesheet" href="./charts.css">
+  </head>
+  <body data-market-info='{"slug":"ltc-eur","sign":{"base":"\u0141","quote":"\u20ac"},"precision":{"base":8,"quote":2,"price":5}}'>
+    <div class="stats">
+      <div class="period-btns">
+        <ul>
+          <li><a href="#" data-period="1">1m</a></li>
+          <li><a href="#" data-period="3">3m</a></li>
+          <li><a href="#" data-period="6">6m</a></li>
+          <li><a href="#" data-period="ytd">YTD</a></li>
+          <li><a href="#" data-period="12">1y</a></li>
+          <li><a href="#" data-period="36">3y</a></li>
+          <!-- we do not have that much data yet!
+          <li><a href="#" data-period="all">All</a></li>
+          -->
+        </ul>
+      </div>
+      <div class="js-overview-chart"></div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"></script>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
+    <!--нужен для thechan-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.min.js"></script> 
+     <script src="http://techanjs.org/techan.min.js"></script> 
+    <script src="./node_modules/accounting/accounting.min.js"></script>
+    <script>
+      $(document).ready(function () {
+
+        $('.stats').overviewChartWidget();
+      });
+</script>
+    <script src="./market.js"></script>
+    <script src="./overview.js"></script>
+  </body>
+</html>

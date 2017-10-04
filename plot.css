@@ -1,0 +1,98 @@
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    font: 12px sans-serif;
+    background: white;
+    border: 1px solid #bbb;
+    pointer-events: none;
+}
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path,
+.y.axis path {
+    display: none;
+}
+
+.chart-axis path,
+.chart-axis line {
+  fill: none;
+  stroke: #fff;
+  shape-rendering: auto;
+}
+
+.chart-area {
+  fill: #5DC0B4;
+  opacity: 0.6;
+}
+
+.chart-line {
+  fill: none;
+  stroke: #6190ce;
+  stroke-width: 1.5px;
+}
+
+.chart-line-point {
+  /*fill: #E94700;
+  stroke: #E94700;*/
+}
+
+.chart-line-hover {
+  fill: none;
+  pointer-events: all;
+}
+
+.chart-hovered {
+  stroke-width: 1px;
+  stroke: #fff;
+  opacity: 0.8;
+}
+
+.chart-info-box {
+  fill: white;
+  stroke: #fff;
+  stroke-width: 0.5px;
+}
+
+.chart-text-date {
+  font-size: 10px;
+  fill: #777;
+  stroke: #777;
+  stroke-width: 0.5px;
+}
+
+.chart-text-currency {
+  stroke-width: 1px;
+}
+
+.chart-text-currency {
+  stroke: #6190ce;
+  fill: #6190ce;
+}
+
+.chart-text-price {
+  stroke: #fff;
+  fill: #fff;
+}
+
+.chart-y-ticks .tick line {
+  stroke: #808080;
+  stroke-width: 0.3px;
+}
+
+.chart-y-ticks .tick text,
+.chart-x-ticks .tick text {
+  font-size: 12px;
+  fill:#5a6579;
+}
