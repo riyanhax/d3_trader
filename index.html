@@ -19,7 +19,7 @@
           -->
         </ul>
       </div>
-      <div class="js-overview-chart"></div>
+      <div class="js-overview-chart" data-period="1"></div>
     </div>
 
     <script
@@ -33,7 +33,12 @@
      <script src="http://techanjs.org/techan.min.js"></script> 
     <script src="./node_modules/accounting/accounting.min.js"></script>
     <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script>
+      $(document).ready(function () {
 
+        $('.js-overview-chart').overviewChartWidget();
+      });
+</script>
     <script src="./websocket.js"></script>
     <script src="./market.js"></script>
     <script src="./overview.js"></script>

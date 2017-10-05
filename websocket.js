@@ -4,9 +4,15 @@
     console.log('connect')
 
     socket.on('jsonData', function (data) {
-      console.log($('.stats'))
-      $('.js-overview-chart').overviewChartWidget(data.payload);
+      var view = $('.js-overview-chart')
+      view.overviewChartWidget(data.payload);
+
+      socket.emit('fu', {
+        type: 'period',
+        payload: view.attr('data-period')
+      })
     });
+
   });
 
   socket.on('event', function(data){});

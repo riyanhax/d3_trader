@@ -47,7 +47,9 @@ io.on('connect', function (socket) {
     countTimer()
   }, 10000)
 
-  socket.emit('hui', 1234)
+  socket.on('fu', function(data) {
+    console.log(data)
+  })
 
   socket.on('disconnect', function () {
     clearInterval(countInterval)
