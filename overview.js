@@ -2,21 +2,20 @@
 
   var period = 1
 
-  var data = {
-    1: [],
-    3: [],
-    6: [],
-    12: [],
-    36: [],
-    "ytd": [],
-    "all": []
-  };
-
   /**
    * Makes an array of month data slices
    * so it can be sliced
    */
   var extract = function(candlestick, json) {
+    var data = {
+      1: [],
+      3: [],
+      6: [],
+      12: [],
+      36: [],
+      "ytd": [],
+      "all": []
+    };
     var item, parse = d3.time.format("%Y-%m-%d").parse;
     var i = 0;
     var ytd = false; // hits true when Jan is found
@@ -78,7 +77,7 @@
     //     volume: +d.Volume
     //   };
     // }).sort(function(a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
-    return data[`${period}`];
+    return data[period];
   };
 
   var OverviewChart = function(el, jsonData) {
@@ -154,27 +153,27 @@
             .xScale(x)
             .yScale(y);
 
-    var tradearrow = techan.plot.tradearrow()
-            .xScale(x)
-            .yScale(y)
-            .y(function(d) {
-                // Display the buy and sell arrows a bit above and below the price, so the price is still visible
-                if(d.type === 'buy') return y(d.low)+5;
-                if(d.type === 'sell') return y(d.high)-5;
-                else return y(d.price);
-            });
+    // var tradearrow = techan.plot.tradearrow()
+    //         .xScale(x)
+    //         .yScale(y)
+    //         .y(function(d) {
+    //             // Display the buy and sell arrows a bit above and below the price, so the price is still visible
+    //             if(d.type === 'buy') return y(d.low)+5;
+    //             if(d.type === 'sell') return y(d.high)-5;
+    //             else return y(d.price);
+    //         });
 
-    var sma0 = techan.plot.sma()
-            .xScale(x)
-            .yScale(y);
+    // var sma0 = techan.plot.sma()
+    //         .xScale(x)
+    //         .yScale(y);
 
-    var sma1 = techan.plot.sma()
-            .xScale(x)
-            .yScale(y);
+    // var sma1 = techan.plot.sma()
+    //         .xScale(x)
+    //         .yScale(y);
 
-    var ema2 = techan.plot.ema()
-            .xScale(x)
-            .yScale(y);
+    // var ema2 = techan.plot.ema()
+    //         .xScale(x)
+    //         .yScale(y);
 
     var volume = techan.plot.volume()
             .accessor(candlestick.accessor())   // Set the accessor to a ohlc accessor so we get highlighted bars
@@ -353,23 +352,23 @@
 
     ohlcSelection.append("g")
             .attr("class", "volume")
-            .attr("clip-path", "url(#ohlcClip)");
+            // .attr("clip-path", "url(#ohlcClip)");
 
     ohlcSelection.append("g")
             .attr("class", "candlestick")
             .attr("clip-path", "url(#ohlcClip)");
 
-    ohlcSelection.append("g")
-            .attr("class", "indicator sma ma-0")
-            .attr("clip-path", "url(#ohlcClip)");
+    // ohlcSelection.append("g")
+    //         .attr("class", "indicator sma ma-0")
+    //         .attr("clip-path", "url(#ohlcClip)");
 
-    ohlcSelection.append("g")
-            .attr("class", "indicator sma ma-1")
-            .attr("clip-path", "url(#ohlcClip)");
+    // ohlcSelection.append("g")
+    //         .attr("class", "indicator sma ma-1")
+    //         .attr("clip-path", "url(#ohlcClip)");
 
-    ohlcSelection.append("g")
-            .attr("class", "indicator ema ma-2")
-            .attr("clip-path", "url(#ohlcClip)");
+    // ohlcSelection.append("g")
+    //         .attr("class", "indicator ema ma-2")
+    //         .attr("clip-path", "url(#ohlcClip)");
 
     ohlcSelection.append("g")
             .attr("class", "percent axis");
@@ -397,9 +396,9 @@
     svg.append('g')
             .attr("class", "crosshair ohlc");
 
-    svg.append("g")
-            .attr("class", "tradearrow")
-            .attr("clip-path", "url(#ohlcClip)");
+    // svg.append("g")
+    //         .attr("class", "tradearrow")
+    //         .attr("clip-path", "url(#ohlcClip)");
 
     svg.append('g')
             .attr("class", "crosshair macd");
@@ -414,10 +413,10 @@
             .attr("class", "supstances analysis")
             .attr("clip-path", "url(#ohlcClip)");
     
-    var indicatorPreRoll = 29;  // Don't show where indicators don't have data
+    var indicatorPreRoll = 0;  // Don't show where indicators don't have data
     var accessor = candlestick.accessor();
 
-    data = extract(candlestick, jsonData)
+    var data = extract(candlestick, jsonData)
 
     x.domain(techan.scale.plot.time(data).domain());
         y.domain(techan.scale.plot.ohlc(data.slice(indicatorPreRoll)).domain());
@@ -449,9 +448,9 @@
         svg.select("g.candlestick").datum(data).call(candlestick);
         svg.select("g.close.annotation").datum([data[data.length-1]]).call(closeAnnotation);
         svg.select("g.volume").datum(data).call(volume);
-        svg.select("g.sma.ma-0").datum(techan.indicator.sma().period(10)(data)).call(sma0);
-        svg.select("g.sma.ma-1").datum(techan.indicator.sma().period(20)(data)).call(sma1);
-        svg.select("g.ema.ma-2").datum(techan.indicator.ema().period(50)(data)).call(ema2);
+        // svg.select("g.sma.ma-0").datum(techan.indicator.sma().period(10)(data)).call(sma0);
+        // svg.select("g.sma.ma-1").datum(techan.indicator.sma().period(20)(data)).call(sma1);
+        // svg.select("g.ema.ma-2").datum(techan.indicator.ema().period(50)(data)).call(ema2);
         svg.select("g.macd .indicator-plot").datum(macdData).call(macd);
         svg.select("g.rsi .indicator-plot").datum(rsiData).call(rsi);
 
@@ -461,7 +460,7 @@
         svg.select("g.trendlines").datum(trendlineData).call(trendline).call(trendline.drag);
         svg.select("g.supstances").datum(supstanceData).call(supstance).call(supstance.drag);
 
-        svg.select("g.tradearrow").datum(trades).call(tradearrow);
+        // svg.select("g.tradearrow").datum(trades).call(tradearrow);
 
         // Stash for zooming
         zoomableInit = x.zoomable().domain([indicatorPreRoll, data.length]).copy(); // Zoom in a little to hide indicator preroll
@@ -484,9 +483,9 @@
       svg.select("g.candlestick").call(candlestick.refresh);
       svg.select("g.close.annotation").call(closeAnnotation.refresh);
       svg.select("g.volume").call(volume.refresh);
-      svg.select("g .sma.ma-0").call(sma0.refresh);
-      svg.select("g .sma.ma-1").call(sma1.refresh);
-      svg.select("g .ema.ma-2").call(ema2.refresh);
+      // svg.select("g .sma.ma-0").call(sma0.refresh);
+      // svg.select("g .sma.ma-1").call(sma1.refresh);
+      // svg.select("g .ema.ma-2").call(ema2.refresh);
       svg.select("g.macd .indicator-plot").call(macd.refresh);
       svg.select("g.rsi .indicator-plot").call(rsi.refresh);
       svg.select("g.crosshair.ohlc").call(ohlcCrosshair.refresh);
@@ -494,7 +493,7 @@
       svg.select("g.crosshair.rsi").call(rsiCrosshair.refresh);
       svg.select("g.trendlines").call(trendline.refresh);
       svg.select("g.supstances").call(supstance.refresh);
-      svg.select("g.tradearrow").call(tradearrow.refresh);
+      // svg.select("g.tradearrow").call(tradearrow.refresh);
     }
     function zoomed() {
       x.zoomable().domain(d3.event.transform.rescaleX(zoomableInit).domain());
