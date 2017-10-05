@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "accounting": "^0.4.1"
+    "accounting": "^0.4.1",
+    "express": "^4.16.1",
+    "socket.io": "^2.0.3"
   }
 }
