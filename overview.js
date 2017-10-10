@@ -1,8 +1,7 @@
-import * as d3 from 'd3'
 import * as techan from 'techan'
 
 (function($, wnd) {
-
+  
   var jsonData = {
       '2017-09-06': [62.40, 63.34, 61.79, 62.88, 30],
       '2017-09-07': [63.37, 63.48, 62.15, 62.50, 33],
@@ -446,6 +445,7 @@ import * as techan from 'techan'
       // svg.select("g.tradearrow").call(tradearrow.refresh);
     }
     function zoomed() {
+      console.log
       x.zoomable().domain(d3.event.transform.rescaleX(zoomableInit).domain());
       y.domain(d3.event.transform.rescaleY(yInit).domain());
 
