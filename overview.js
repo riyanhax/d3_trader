@@ -1,3 +1,6 @@
+import * as d3 from 'd3'
+import * as techan from 'techan'
+
 (function($, wnd) {
 
   var jsonData = {
@@ -39,6 +42,7 @@
     if (!json) {
       json = jsonData
     }
+
     var data = {
       1: [],
       3: [],
@@ -48,10 +52,10 @@
       "ytd": [],
       "all": []
     };
-    var item, parse = d3.time.format("%Y-%m-%d").parse;
+    var item, parse = d3.timeParse("%Y-%m-%d");
     var i = 0;
     var ytd = false; // hits true when Jan is found
-    for (dt in json) {
+    for (let dt in json) {
       if (json.hasOwnProperty(dt)) {
         item = {
           date: parse(dt),
@@ -119,10 +123,10 @@
     dim.indicator.top = dim.ohlc.height+dim.indicator.padding;
     dim.indicator.bottom = dim.indicator.top+dim.indicator.height+dim.indicator.padding;
 
-    var indicatorTop = d3.scale.linear()
+    var indicatorTop = d3.scaleLinear()
       .range([dim.indicator.top, dim.indicator.bottom]); // интервал значений по оси
 
-    var parseDate = d3.time.format("%d-%b-%y").parse;
+    var parseDate = d3.timeParse("%d-%b-%y");
 
     var zoom = d3.zoom()
       .on("zoom", zoomed);
@@ -130,14 +134,14 @@
     var x = techan.scale.financetime()
       .range([0, dim.plot.width]);
 
-    var y = d3.scale.linear()
+    var y = d3.scaleLinear()
       .range([dim.ohlc.height, 0]);
 
     // var yPercent = y.copy();   // Same as y at this stage, will get a different domain later
 
     var yInit, zoomableInit;
 
-    var yVolume = d3.scale.linear()
+    var yVolume = d3.scaleLinear()
       .range([y(0), y(0.1)]);
 
       var candlestick = techan.plot.candlestick()
@@ -193,7 +197,7 @@
             .orient("left")
             .width(35)
 //
-    var macdScale = d3.scale.linear()
+    var macdScale = d3.scaleLinear()
             .range([indicatorTop(0)+dim.indicator.height, indicatorTop(0)]);
 
     var rsiScale = macdScale.copy()
@@ -475,4 +479,9 @@
       }
     });
   };
+
 }(jQuery, window));
+
+console.log($.fn)
+$('.js-overview-chart').overviewChartWidget();
+
