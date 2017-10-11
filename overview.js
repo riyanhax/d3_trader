@@ -169,8 +169,20 @@ import * as techan from 'techan'
       .width(65)
       .translate([0, dim.plot.height]);
 // координатная ось цен
-    var yAxis = d3.axisLeft(y)
-        .ticks(4)
+    var yAxis = d3.axisRight(y)
+      .ticks(4)
+      .tickFormat(function(d) {
+        return "\xa0" + d
+      });
+    
+    // https://bl.ocks.org/mbostock/3371592
+    function customYAxis(g) {
+      console.log(g)
+      g.call(yAxis);
+      g.select(".domain").remove();
+      g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777").attr("stroke-dasharray", "2,2");
+      g.selectAll(".tick text").attr("x", 4).attr("dy", -4);
+    }
 
     var ohlcAnnotation = techan.plot.axisannotation()
       .axis(yAxis)
@@ -305,9 +317,11 @@ import * as techan from 'techan'
       .attr("class", "ohlc")
       .attr("transform", "translate(0,0)");
 
+  // добавляем в дом ось Y
     ohlcSelection.append("g")
       .attr("class", "axis")
-    
+      .call(customYAxis);
+
     // x(1) = 860  x(0) = 0
 
     ohlcSelection.append("g")
@@ -327,6 +341,7 @@ import * as techan from 'techan'
 
     ohlcSelection.append("g")
             .attr("class", "volume axis");
+    
 
     var indicatorSelection = svg.selectAll("svg > g.indicator").data(["macd", "rsi"]).enter()
              .append("g")

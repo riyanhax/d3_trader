@@ -4,7 +4,7 @@ body {
     }
 
     text {
-        fill: #000;
+        fill: #FFF;
     }
 
     text.symbol {
@@ -187,3 +187,8 @@ body {
     .tradearrow path.highlight.sell {
         stroke: #9900FF;
     }
+
+/* tradingview */
+.tradingview {
+    height: 500px;
+}
